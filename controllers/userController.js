@@ -64,6 +64,7 @@ module.exports = {
     }
   },
 
+  // DELETE A USER
   async deleteUser(req, res) {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.id});
@@ -73,6 +74,54 @@ module.exports = {
       }
 
       res.json({message: `${user.username} has been deleted`})
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
+  },
+
+  // ADD A FRIEND TO A USER
+  async addFriend(req, res) {
+    try {
+      // finding new friend to 1. make sure they exist and 2. to use the username in the res.json()
+      const newFriend = await User.findOne({ _id: req.params.friendId })
+      if (!newFriend) {
+        return res.status(404).json({ message: 'The friend you are trying to add does not exist' })
+      }
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId},
+        { $push: { friends: req.params.friendId}});
+
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that id' })
+      }
+
+      res.json({ message: `${newFriend.username} has been added as ${user.username}'s friend`})
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
+  },
+
+  // REMOVE A FRIEND FROM A USER
+  async removeFriend(req, res) {
+    try {
+      // findingold friend to 1. make sure they exist and 2. to use the username in the res.json()
+      const oldFriend = await User.findOne({ _id: req.params.friendId })
+      if (!oldFriend) {
+        return res.status(404).json({ message: 'The friend you are trying to remove does not exist' })
+      }
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId},
+        { $pull: { friends: req.params.friendId}});
+
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that id' })
+      }
+
+      res.json({ message: `${oldFriend.username} has been removed from ${user.username}'s friends`})
     } catch (err) {
       console.log(err)
       res.status(500).json(err)
