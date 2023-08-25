@@ -19,6 +19,12 @@ const reactionSchema = new Schema({
   }
 })
 
+reactionSchema
+    .virtual('creationDate')
+    .get(function () {
+      return this.createdAt.toDateString()
+    })
+
 const Reaction = model('Reaction', reactionSchema)
 
 module.exports = {Reaction, reactionSchema};
