@@ -81,5 +81,43 @@ module.exports = {
       console.log(err)
       res.status(500).json(err)
     }
+  },
+
+  // ADD A REACTION
+  async addReaction(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId},
+        { $push: { reactions: req.body}}
+      )
+
+      if (!thought) {
+        return res.status(404).json({message: 'No thought with that id'})
+      }
+
+      res.json(req.body)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+  },
+
+  // DELETE A REACTION
+  async removeReaction(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId},
+        { $pull: { reactions: req.params.reactionId}}
+      )
+
+      if (!thought) {
+        return res.status(404).json({message: 'No thought with that id'})
+      }
+
+      res.json({ message: 'The reaction has been removed'})
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
   }
 }
