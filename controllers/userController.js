@@ -2,7 +2,7 @@ const { User } = require('../models');
 
 module.exports = {
 
-  // GET ALL COURSES
+  // GET ALL USERS
   async getUsers(req, res) {
     try {
       const users = await User
@@ -15,10 +15,12 @@ module.exports = {
     }
   },
 
-  // GET A COURSE
+  // GET A USER
   async getUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.id })
+      const user = await User
+        .findOne({ _id: req.params.id })
+        .populate('friends')
 
       if (!user) {
         return res.status(404).json({message: 'No user with that id'})
