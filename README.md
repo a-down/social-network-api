@@ -1,4 +1,4 @@
-# 18 NoSQL: Social Network API
+# Social Network API (Module 18 Homework)
 
 The goal was to create an API for a social network using a NoSQL database (MongoDB). The requirements were:
 ```md
