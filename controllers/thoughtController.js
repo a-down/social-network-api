@@ -11,7 +11,7 @@ module.exports = {
       res.json(thoughts);
     } catch (err) {
       res.status(500).json(err)
-      console.log(err)
+      // console.log(err)
     }
   },
 
@@ -27,7 +27,7 @@ module.exports = {
 
       res.json(thought)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -42,7 +42,7 @@ module.exports = {
       )
       res.json(thought)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -62,7 +62,7 @@ module.exports = {
 
       res.json(thought)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -78,7 +78,7 @@ module.exports = {
 
       res.json({message: `${thought.username}'s thought has been deleted`})
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -97,7 +97,7 @@ module.exports = {
 
       res.json(req.body)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     res.status(500).json(err)
   }
   },
@@ -116,7 +116,7 @@ module.exports = {
 
       res.json({ message: 'The reaction has been removed'})
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     res.status(500).json(err)
   }
   }

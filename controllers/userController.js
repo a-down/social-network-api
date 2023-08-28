@@ -11,7 +11,7 @@ module.exports = {
       res.json(users);
     } catch (err) {
       res.status(500).json(err)
-      console.log(err)
+      // console.log(err)
     }
   },
 
@@ -28,7 +28,7 @@ module.exports = {
 
       res.json(user)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -59,7 +59,7 @@ module.exports = {
 
       res.json(user)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -75,7 +75,7 @@ module.exports = {
 
       // delete thoughts associated with the user
       const thoughtsArr = user.thoughts.map(thought => thought.toString())
-      console.log(thoughtsArr)
+      // console.log(thoughtsArr)
       thoughtsArr.forEach(async function (thoughtId) { 
         await Thought.findOneAndDelete({ _id: thoughtId}) 
       })
@@ -84,7 +84,7 @@ module.exports = {
 
       res.json({message: `${user.username} has been deleted`})
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -108,7 +108,7 @@ module.exports = {
 
       res.json({ message: `${newFriend.username} has been added as ${user.username}'s friend`})
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   },
@@ -132,7 +132,7 @@ module.exports = {
 
       res.json({ message: `${oldFriend.username} has been removed from ${user.username}'s friends`})
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(500).json(err)
     }
   }
